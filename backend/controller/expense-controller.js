@@ -40,12 +40,19 @@ export const addExpense = async (req, res) => {
 export const deleteExpense = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletedExpense = await Expense.findOneAndDelete({ id: id });
-    if (!deletedExpense) {
+    const existingExpense = await Expense.findOne({ id: id });
+    if (!existingExpense) {
       return res
         .status(404)
         .json({ success: false, message: "Expense not found" });
     }
+    if (existingExpense.userId.toString() !== req.user.id) {
+      return res.status(403).json({
+        success: false,
+        message: "Unauthorized to update this expense",
+      });
+    }
+    const deletedExpense = await Expense.findOneAndDelete({ id: id });
     res.status(200).json({
       success: true,
       message: "Expense deleted successfully",

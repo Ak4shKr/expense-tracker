@@ -7,7 +7,7 @@ const Expensetrack = ({ chartDataResponse }) => {
         className="flex md:flex-col overflow-x-auto md:overflow-x-hidden gap-4
       "
       >
-        {/* Card 1 */}
+       
         <div className="min-w-[280px] md:min-w-full bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] p-4 rounded-xl flex-shrink-0 shadow-lg">
           <h3 className="text-base text-blue-200 mb-2 tracking-wide">
             Total Expenses
@@ -20,7 +20,7 @@ const Expensetrack = ({ chartDataResponse }) => {
           </p>
         </div>
 
-        {/* Card 2 */}
+       
         <div className="min-w-[280px] md:min-w-full bg-gradient-to-br from-[#059669] to-[#065F46] p-4 rounded-xl flex-shrink-0 shadow-lg">
           <h3 className="text-base text-green-200 mb-2 tracking-wide">
             Total Amount Remaining
@@ -30,7 +30,7 @@ const Expensetrack = ({ chartDataResponse }) => {
           </p>
         </div>
 
-        {/* Card 3 */}
+       
         <div className="min-w-[280px] md:min-w-full bg-gradient-to-br from-[#9333EA] to-[#6B21A8] p-4 rounded-xl flex-shrink-0 shadow-lg">
           <h3 className="text-base text-purple-200 tracking-wide mb-3">
             Yearly Limit

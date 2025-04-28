@@ -32,12 +32,12 @@ const Mainbody = ({ expensesResponse, chartDataResponse }) => {
   }
   return (
     <div className="w-full flex flex-col-reverse md:flex-row justify-between gap-4 p-4 mt-4">
-      {/* Left Side */}
+     
       <div className="h-[calc(100dvh-6rem)] flex flex-col w-full md:w-2/3 bg-[#192238] p-4 rounded-xl border border-gray-700 space-y-4">
         <Expensecard expensesResponse={expensesResponse} />
       </div>
 
-      {/* Right Side */}
+   
       <div className="w-full h-fit md:w-1/3 bg-[#192238] p-4 rounded-xl border border-gray-700 space-y-4">
         <Expensetrack chartDataResponse={chartDataResponse} />
       </div>

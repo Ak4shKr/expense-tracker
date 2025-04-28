@@ -15,7 +15,7 @@ export function useModal() {
   const onClose = () => {
     if (modalIdRef.current) {
       modals.close(modalIdRef.current);
-      modalIdRef.current = null; // clear after closing
+      modalIdRef.current = null; 
     }
   };
 

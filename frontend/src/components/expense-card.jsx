@@ -33,14 +33,14 @@ const Expensecard = ({ expensesResponse }) => {
   return (
     <>
       <Expenseleft handleSearch={setSearchQuery} />{" "}
-      {/* Pass the setSearchQuery function here */}
+      
       <ScrollArea scrollbarSize={0}>
         {filteredExpenses.map((expense, index) => (
           <div
             key={index}
             className="bg-[#111827] rounded-sm shadow-md p-3 md:p-4 mb-4 flex items-center justify-between"
           >
-            {/* Left Side */}
+           
             <div className="flex items-center gap-3">
               <img
                 src={`${expense.category}.png`}
@@ -60,7 +60,7 @@ const Expensecard = ({ expensesResponse }) => {
               </div>
             </div>
 
-            {/* Right Side */}
+         
             <div className="text-right flex flex-col items-end justify-between h-full">
               <p className="text-lg md:text-xl font-semibold text-red-500 text-nowrap">
                 - ${expense.amount}
@@ -108,7 +108,6 @@ const DeleteExpenseModal = ({ onclose, id }) => {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const handledelete = async () => {
-    // Call the delete API here using the id
     setLoading(true);
     const response = await service.delete(`/delete-expense/${id}`);
     if (response.data.success) {

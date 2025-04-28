@@ -22,9 +22,9 @@ const ExpenseChart = ({ chartDataResponse }) => {
           labelsType="percent"
           withLabels
           data={chartDataResponse.categoryStats.map((item, index) => ({
-            name: item.category, // Name for the label
-            value: item.amount, // The value for the segment
-            color: colors[index].color, // Color for the segment
+            name: item.category, 
+            value: item.amount, 
+            color: colors[index].color, 
           }))}
           height={300}
           withTooltip

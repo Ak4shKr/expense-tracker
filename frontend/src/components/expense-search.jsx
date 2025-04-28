@@ -16,7 +16,7 @@ const Expenseleft = ({ handleSearch }) => {
         <Input
           placeholder="Search expenses..."
           className="w-full"
-          onChange={handleInputChange} // Listen for input changes and trigger search
+          onChange={handleInputChange} 
         />
         <button
           className="text-sm px-4 py-1 bg-[#2563EB] text-white border border-blue-600 rounded-md"
