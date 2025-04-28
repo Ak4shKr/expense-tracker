@@ -23,7 +23,6 @@ export const Login = ({ onClose }) => {
     }
     setLoading(true);
 
-    // Login logic here
     try {
       const response = await service.post("/login", {
         email,
@@ -58,7 +57,6 @@ export const Login = ({ onClose }) => {
         SignIn
       </h2>
       <form onSubmit={handleSubmit}>
-        {/* Email Input */}
         <Input.Wrapper label="Email">
           <Input
             placeholder="Enter email"
@@ -73,7 +71,7 @@ export const Login = ({ onClose }) => {
             }}
           />
         </Input.Wrapper>
-        {/* password input */}
+
         <PasswordInput
           label="Password"
           value={password}
@@ -85,7 +83,7 @@ export const Login = ({ onClose }) => {
             },
           }}
         />
-        {/* Submit Button */}
+
         <div className="text-center">
           <Button
             w="100%"
