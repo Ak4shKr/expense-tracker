@@ -106,8 +106,10 @@ export default Expensecard;
 
 const DeleteExpenseModal = ({ onclose, id }) => {
   const queryClient = useQueryClient();
+  const [loading, setLoading] = useState(false);
   const handledelete = async () => {
     // Call the delete API here using the id
+    setLoading(true);
     const response = await service.delete(`/delete-expense/${id}`);
     if (response.data.success) {
       queryClient.invalidateQueries(["expenses", "chart-data"]);
@@ -118,14 +120,16 @@ const DeleteExpenseModal = ({ onclose, id }) => {
       });
 
       onclose();
+      setLoading(false);
     } else {
       notifications.show({
         title: "Error",
         message: "Failed to delete expense",
         color: "red",
       });
+      setLoading(false);
+      onclose();
     }
-    onclose();
   };
 
   return (
@@ -137,7 +141,7 @@ const DeleteExpenseModal = ({ onclose, id }) => {
         <Button variant="default" onClick={onclose}>
           Cancel
         </Button>
-        <Button color="red" onClick={() => handledelete(id)}>
+        <Button color="red" onClick={() => handledelete(id)} loading={loading}>
           Confirm
         </Button>
       </div>

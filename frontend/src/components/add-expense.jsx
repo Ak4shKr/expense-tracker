@@ -8,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 const AddExpenseModal = ({ edit = false, onClose }) => {
   const queryClient = useQueryClient();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
@@ -34,6 +35,7 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    setLoading(true);
     const response = await service.post("/add-expense", formData);
     console.log(response);
     if (response.data.success) {
@@ -43,7 +45,7 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
         color: "green",
       });
       queryClient.invalidateQueries(["expenses", "chart-data"]);
-
+      setLoading(false);
       onClose();
     } else {
       notifications.show({
@@ -51,6 +53,7 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
         message: "Failed to add expense",
         color: "red",
       });
+      setLoading(false);
     }
   };
 
@@ -153,6 +156,7 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
           size="sm"
           color="indigo"
           className="mt-4"
+          loading={loading}
         >
           Submit Expense
         </Button>

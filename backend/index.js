@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: "https://expense-tracker-opal-ten-54.vercel.app", // Frontend URL for production
     // origin: "http://localhost:5173", // Frontend URL for development
-    credentials: true, 
+    credentials: true,
   })
 );
 

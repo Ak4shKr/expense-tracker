@@ -8,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 const EditExpenseModal = ({ onClose, expenseData }) => {
   const queryClient = useQueryClient();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
@@ -46,6 +47,7 @@ const EditExpenseModal = ({ onClose, expenseData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await service.put(
         `/update-expense/${expenseData.id}`,
         formData
@@ -58,12 +60,14 @@ const EditExpenseModal = ({ onClose, expenseData }) => {
         });
         queryClient.invalidateQueries(["expenses", "chart-data"]);
         onClose();
+        setLoading(false);
       } else {
         notifications.show({
           title: "Error",
           message: "Failed to update expense",
           color: "red",
         });
+        setLoading(false);
       }
     } catch (error) {
       notifications.show({
@@ -71,6 +75,8 @@ const EditExpenseModal = ({ onClose, expenseData }) => {
         message: error.message || "Something went wrong",
         color: "red",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -171,6 +177,7 @@ const EditExpenseModal = ({ onClose, expenseData }) => {
           size="sm"
           color="indigo"
           className="mt-4"
+          loading={loading}
         >
           Update Expense
         </Button>
