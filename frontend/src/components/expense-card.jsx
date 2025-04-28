@@ -6,6 +6,7 @@ import { Button, ScrollArea, Text, Input } from "@mantine/core";
 import service from "../services/service";
 import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
+import EditExpenseModal from "./edit-expense";
 
 const Expensecard = ({ expensesResponse }) => {
   const { openConfirm, onClose } = useModal();
@@ -66,13 +67,22 @@ const Expensecard = ({ expensesResponse }) => {
               </p>
               <div className="flex gap-3 mt-2">
                 <button
-                  className="text-blue-500"
-                  onClick={() => openConfirm({})}
+                  className="text-blue-500 hover:text-blue-600 cursor-pointer"
+                  onClick={() =>
+                    openConfirm({
+                      content: (
+                        <EditExpenseModal
+                          onClose={onClose}
+                          expenseData={expense}
+                        />
+                      ),
+                    })
+                  }
                 >
                   <FiEdit size={16} />
                 </button>
                 <button
-                  className="text-red-400"
+                  className="text-red-400 hover:text-red-500 cursor-pointer"
                   onClick={() =>
                     openConfirm({
                       content: (

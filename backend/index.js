@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    // origin: "https://ymca-exam.vercel.app", // Frontend URL for production
+    // origin: "https://expense-tracker-opal-ten-54.vercel.app", // Frontend URL for production
     origin: "http://localhost:5173", // Frontend URL for development
     credentials: true, // Allow cookies if needed
   })

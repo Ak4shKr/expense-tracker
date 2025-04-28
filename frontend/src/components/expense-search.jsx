@@ -26,7 +26,7 @@ const Expenseleft = ({ handleSearch }) => {
             });
           }}
         >
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-2 cursor-pointer">
             <FiPlus /> Add
           </span>
         </button>

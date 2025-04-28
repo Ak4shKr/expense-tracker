@@ -1,9 +1,7 @@
 import { Drawer } from "@mantine/core";
 import { FiBarChart2 } from "react-icons/fi";
-import { PieChart, BarChart } from "@mantine/charts";
 import { useState } from "react";
 import { isLoggedIn } from "../utils/protected";
-import { IoLogInOutline } from "react-icons/io5";
 import ExpenseChart from "./expenses-chart";
 
 export const Navbar = ({ chartDataResponse }) => {
@@ -21,7 +19,7 @@ export const Navbar = ({ chartDataResponse }) => {
         {isLoggedIn() && (
           <button
             onClick={openDrawer}
-            className="text-xs px-3 border border-white/80 text-white/90 rounded-md hover:text-[#F0185C] transition-all"
+            className="text-xs cursor-pointer px-3 border border-white/80 text-white/90 rounded-md hover:text-[#F0185C] transition-all"
           >
             <span className="flex items-center gap-1">
               <FiBarChart2 color="red" />

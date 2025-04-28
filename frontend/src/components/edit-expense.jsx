@@ -1,12 +1,12 @@
 import { Button, Input, Select, Textarea } from "@mantine/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { DateInput } from "@mantine/dates";
 import service from "../services/service";
 import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 
-const AddExpenseModal = ({ edit = false, onClose }) => {
+const EditExpenseModal = ({ onClose, expenseData }) => {
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     title: "",
@@ -15,6 +15,18 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
     category: "",
     date: null,
   });
+
+  useEffect(() => {
+    if (expenseData) {
+      setFormData({
+        title: expenseData.title || "",
+        amount: expenseData.amount || "",
+        description: expenseData.description || "",
+        category: expenseData.category || "",
+        date: expenseData.date ? new Date(expenseData.date) : null,
+      });
+    }
+  }, [expenseData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,22 +45,30 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    const response = await service.post("/add-expense", formData);
-    console.log(response);
-    if (response.data.success) {
-      notifications.show({
-        title: "Expense Added",
-        message: "Your expense has been added successfully.",
-        color: "green",
-      });
-      queryClient.invalidateQueries(["expenses", "chart-data"]);
-
-      onClose();
-    } else {
+    try {
+      const response = await service.put(
+        `/update-expense/${expenseData.id}`,
+        formData
+      );
+      if (response.data.success) {
+        notifications.show({
+          title: "Expense Updated",
+          message: "Your expense has been updated successfully.",
+          color: "green",
+        });
+        queryClient.invalidateQueries(["expenses", "chart-data"]);
+        onClose();
+      } else {
+        notifications.show({
+          title: "Error",
+          message: "Failed to update expense",
+          color: "red",
+        });
+      }
+    } catch (error) {
       notifications.show({
         title: "Error",
-        message: "Failed to add expense",
+        message: error.message || "Something went wrong",
         color: "red",
       });
     }
@@ -57,9 +77,7 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
   return (
     <div className="rounded-lg shadow-md border-gray-400">
       <div className="flex items-center justify-between px-2 py-2 border-b border-gray-700">
-        <h2 className="text-lg font-semibold text-white">
-          {edit ? "Edit" : "Add"} Expense
-        </h2>
+        <h2 className="text-lg font-semibold text-white">Edit Expense</h2>
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-white transition cursor-pointer"
@@ -154,11 +172,11 @@ const AddExpenseModal = ({ edit = false, onClose }) => {
           color="indigo"
           className="mt-4"
         >
-          Submit Expense
+          Update Expense
         </Button>
       </form>
     </div>
   );
 };
 
-export default AddExpenseModal;
+export default EditExpenseModal;
