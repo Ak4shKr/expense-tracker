@@ -30,7 +30,7 @@ export const Login = ({ onClose }) => {
         password,
       });
       console.log(response);
-      if (response.status === 200) {
+      if (response.data.success) {
         notifications.show({
           title: "Login Success",
           message: "You have been logged in successfully.",

@@ -9,6 +9,9 @@ const Home = () => {
   const { data: expensesData, isLoading: isLoadingExpenses } = useQuery({
     queryKey: ["expenses"],
     queryFn: async () => {
+      if (!isLoggedIn()) {
+        return null;
+      }
       const response = await service("/all-expenses");
       if (!response.status) {
         throw new Error("Failed to fetch expenses");
@@ -26,6 +29,9 @@ const Home = () => {
   const { data: ChartData, isLoading: isLoadingChart } = useQuery({
     queryKey: ["chart-data"],
     queryFn: async () => {
+      if (!isLoggedIn()) {
+        return null;
+      }
       const response = await service("/chart-data");
       if (!response.status) {
         throw new Error("Failed to fetch user info");
@@ -45,7 +51,6 @@ const Home = () => {
     return <div>Loading...</div>;
   }
 
-  // normal render
   return (
     <>
       <Navbar chartDataResponse={ChartData} />

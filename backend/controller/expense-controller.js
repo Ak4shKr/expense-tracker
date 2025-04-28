@@ -130,7 +130,7 @@ export const login = async (req, res) => {
 
       const token = generateToken(newUser);
 
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         message: "user loggedIn",
         data: {
@@ -138,7 +138,6 @@ export const login = async (req, res) => {
           token,
         },
       });
-      return;
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, isUser.password);
