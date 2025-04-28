@@ -81,7 +81,6 @@ src/
    ```bash
    cd backend
    npm install
-   npm start
    ```
 
 2. **Set up `.env` file:**
@@ -93,7 +92,7 @@ src/
 
 3. **Run the server:**
    ```bash
-   npm run dev
+     npm start
    ```
 ---
 
