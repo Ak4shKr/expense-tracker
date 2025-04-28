@@ -67,6 +67,11 @@ src/
 - **Edit/Delete**: Modify or remove expenses with a click.
 - **Notifications**: Get instant feedback on actions.
 
+
+## Performance on TOP
+![Screenshot 2025-04-29 013606](https://github.com/user-attachments/assets/10a87fd9-2a49-4418-812c-5a87d48e71f9)
+
+
 ---
 
 ## 🚀 Getting Started
