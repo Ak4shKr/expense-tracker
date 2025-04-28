@@ -39,6 +39,7 @@ const ExpenseChart = ({ chartDataResponse }) => {
         </h3>
         <BarChart
           h={300}
+          w={375}
           data={chartDataResponse.monthStats}
           dataKey="month"
           series={[{ name: "amount", color: "violet.6" }]}
